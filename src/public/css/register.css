@@ -1,0 +1,136 @@
+#btn_menu8 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  background-color: #0000FF;
+  transition: background-color 0.3s ease;
+}
+
+#btn_menu8::before {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 2px;
+  background: #f7f7f7;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease, top 0.1s ease;
+}
+
+#btn_menu8 span {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 25%;
+  display: block;
+  overflow: hidden;
+  width: 60%;
+  height: 2px;
+  color: #f7f7f7;
+  opacity: 1;
+  background-color: #f7f7f7;
+  transition: opacity 0.1s ease;
+}
+
+#btn_menu8::after {
+  position: absolute;
+  bottom: 30%;
+  left: 25%;
+  display: block;
+  content: "";
+  width: 20%;
+  height: 2px;
+  background: #f7f7f7;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease, bottom 0.1s ease, width 0.3s ease;
+}
+
+#btn_menu8:hover {
+  background-color: #555;
+}
+
+#btn_menu8.active::before {
+  top: calc(50% - 1px);
+  transform: rotate(135deg);
+}
+
+#btn_menu8.active span {
+  opacity: 0;
+}
+
+#btn_menu8.active::after {
+  width: 50%;
+  bottom: calc(50% - 1px);
+  transform: rotate(-135deg);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+
+.login-form {
+  position: relative;
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #0000FF;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="name"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #45a049;
+}
+
+.login-form .login-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+header {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
