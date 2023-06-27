@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.home,
+.logout,
+.mypage {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: lightgray;
+  text-align: center;
+}
+
+.square_btn {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  background: #0000FF;
+}
+
+.square_btn::before,
+.square_btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 25px;
+  background: #fff;
+}
+
+.square_btn::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.square_btn::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
