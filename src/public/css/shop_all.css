@@ -1,0 +1,22 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.shop {
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+}
+
+.shop h3 {
+  margin-top: 0;
+}
+
+.shop a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  margin-top: 10px;
+}
