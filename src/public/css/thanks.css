@@ -1,26 +1,120 @@
-body {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
 header {
-  background-color: #f2f2f2;
-  padding: 20px;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
+
+.rese {
+  color: #0000FF;
+}
+
+
+#btn_menu8 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  background-color: #0000FF;
+  transition: background-color 0.3s ease;
+}
+
+#btn_menu8::before {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 2px;
+  background: #f7f7f7;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease, top 0.1s ease;
+}
+
+#btn_menu8 span {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 25%;
+  display: block;
+  overflow: hidden;
+  width: 60%;
+  height: 2px;
+  color: #f7f7f7;
+  opacity: 1;
+  background-color: #f7f7f7;
+  transition: opacity 0.1s ease;
+}
+
+#btn_menu8::after {
+  position: absolute;
+  bottom: 30%;
+  left: 25%;
+  display: block;
+  content: "";
+  width: 20%;
+  height: 2px;
+  background: #f7f7f7;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease, bottom 0.1s ease, width 0.3s ease;
+}
+
+#btn_menu8:hover {
+  background-color: #555;
+}
+
+#btn_menu8.active::before {
+  top: calc(50% - 1px);
+  transform: rotate(135deg);
+}
+
+#btn_menu8.active span {
+  opacity: 0;
+}
+
+#btn_menu8.active::after {
+  width: 50%;
+  bottom: calc(50% - 1px);
+  transform: rotate(-135deg);
+}
+
+
+
 
 .menu-button {
-  float: left;
+  margin-right: 100px;
 }
 
-.message {
-  margin-top: 100px;
+.done {
+  display: top;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50% 25%;
+  ;
+
+}
+
+.thanks-message {
+  margin-top: 300px;
   font-size: 24px;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+
+  padding: 20px;
+
 }
 
 .back-button {
-  margin-top: 20px;
+  margin: 60px;
+  background-color: #0000FF;
+  color: #f7f7f7;
 }
