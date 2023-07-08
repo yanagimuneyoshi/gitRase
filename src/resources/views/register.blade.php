@@ -5,25 +5,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 </head>
 
 <body>
   <header>
     <div class="menu-button">
-      <button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button>
+      <a href="/menu2"><button id="btn_menu8" class="btn_menu"><span>MENU</span></button></a>
     </div>
     <div class="rese">
-      <a>RESE</a>
+      RESE
     </div>
   </header>
+  
 
   <div class="login-form">
-    <h2>Login</h2>
-    <input type="name" placeholder="username">
-    <input type="text" placeholder="Email">
-    <input type="password" placeholder="Password">
-    <button type="submit" class="login-button">Login</button>
+    <h2>Registration</h2>
+
+    <div class="input-group">
+      <i class="fa-solid fa-user"></i>
+      <input type="name" placeholder="username">
+    </div>
+
+    <div class="input-group">
+      <i class="fa-solid fa-envelope"></i>
+      <input type="text" placeholder="Email">
+    </div>
+    <div class="input-group">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" placeholder="Password">
+    </div>
+
+    <button type="submit" class="login-button">登録</button>
   </div>
 </body>
 
