@@ -7,6 +7,12 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+  <style>
+    .error-message {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,11 +38,14 @@
         <i class="fa-solid fa-envelope"></i>
         <input type="email" name="email" placeholder="Email">
       </div>
+
       <div class="input-group">
         <i class="fa-solid fa-lock"></i>
         <input type="password" name="password" placeholder="Password">
       </div>
-
+      @error('email')
+      <div class="error-message">{{ $message }}</div>
+      @enderror
       <button type="submit" class="login-button">登録</button>
     </form>
   </div>

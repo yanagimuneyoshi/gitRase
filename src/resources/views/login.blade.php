@@ -7,12 +7,6 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
-  <style>
-    .error-message {
-      color: red;
-      margin-bottom: 10px;
-    }
-  </style>
 </head>
 
 <body>
@@ -33,9 +27,7 @@
     <form action="{{ route('login') }}" method="POST">
       @csrf
 
-      @if($errors->has('login_error'))
-      <div class="error-message">{{ $errors->first('login_error') }}</div>
-      @endif
+      
 
       <div class="input-group">
         <i class="fa-solid fa-envelope"></i>
@@ -45,6 +37,9 @@
         <i class="fa-solid fa-lock"></i>
         <input type="password" name="password" placeholder="Password">
       </div>
+      @if($errors->has('login_error'))
+      <div class="error-message">{{ $errors->first('login_error') }}</div>
+      @endif
 
       <button type="submit" class="login-button">ログイン</button>
     </form>

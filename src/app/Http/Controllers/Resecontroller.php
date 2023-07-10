@@ -50,6 +50,13 @@ class ReseController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
+        // 既存のメールアドレスをチェック
+        $existingUser = User::where('email', $email)->first();
+        if ($existingUser) {
+            // メールアドレスが既に存在する場合はエラーメッセージを返す
+            return back()->withErrors(['email' => 'メールアドレス 重複エラー']);
+        }
+
         // ユーザーモデルを作成して保存
         $user = new User();
         $user->name = $username;
