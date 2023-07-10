@@ -18,26 +18,27 @@
       RESE
     </div>
   </header>
-  
 
   <div class="login-form">
     <h2>Registration</h2>
+    <form action="/register" method="POST">
+      @csrf
+      <div class="input-group">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" name="username" placeholder="Username">
+      </div>
 
-    <div class="input-group">
-      <i class="fa-solid fa-user"></i>
-      <input type="name" placeholder="username">
-    </div>
+      <div class="input-group">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="email" name="email" placeholder="Email">
+      </div>
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" name="password" placeholder="Password">
+      </div>
 
-    <div class="input-group">
-      <i class="fa-solid fa-envelope"></i>
-      <input type="text" placeholder="Email">
-    </div>
-    <div class="input-group">
-      <i class="fa-solid fa-lock"></i>
-      <input type="password" placeholder="Password">
-    </div>
-
-    <button type="submit" class="login-button">登録</button>
+      <button type="submit" class="login-button">登録</button>
+    </form>
   </div>
 </body>
 

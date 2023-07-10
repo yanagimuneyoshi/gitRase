@@ -11,7 +11,7 @@
 
 <header>
   <div class="menu-button">
-    <button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button>
+    <a href="/"><button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button></a>
   </div>
   <div class="rese">
     <a>Rese</a>
@@ -21,7 +21,7 @@
 <div class="done">
   <div class="thanks-message">
     <div class="message">会員登録ありがとうございます</div>
-    <button class="back-button">ログイン</button>
+    <a href="login"><button class="back-button">ログイン</button></a>
   </div>
 </div>
 </body>

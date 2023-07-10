@@ -7,18 +7,16 @@
   <title>Document</title>
   <link rel="stylesheet" href="{{ asset('css/menu2.css') }}" />
 </head>
-<header>
-  <span class="square_btn"></span>
-</header>
+
 
 <header>
-  <span class="square_btn"></span>
+  <a href="/"><span class="square_btn"></span></a>
 </header>
 
 <body>
-  <div class="home">Home</div>
-  <div class="registration">Registration</div>
-  <div class="login">Login</div>
+  <a href="/"><div class="home">Home</div></a>
+  <a href="/register"><div class="registration">Registration</div></a>
+  <a href="/login"><div class="login">Login</div></a>
 </body>
 
 </html>

@@ -9,13 +9,13 @@
 </head>
 
 <header>
-  <span class="square_btn"></span>
+  <a href="/"><span class="square_btn"></span></a>
 </header>
 
 <body>
-  <div class="home">Home</div>
-  <div class="logout">Logout</div>
-  <div class="mypage">Mypage</div>
+  <a href="/"><div class="home">Home</div></a>
+  <a href="/menu2"><div class="logout">Logout</div></a>
+  <a href="/my_page"><div class="mypage">Mypage</div></a>
 </body>
 
 </html>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReseController extends Controller
 {
@@ -40,4 +42,39 @@ class ReseController extends Controller
     {
         return view('login');
     }
+
+    public function processRegister(Request $request)
+    {
+        // ユーザーの入力値を取得
+        $username = $request->input('username');
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        // ユーザーモデルを作成して保存
+        $user = new User();
+        $user->name = $username;
+        $user->email = $email;
+        $user->password = bcrypt($password);
+        $user->save();
+
+        // 登録後の処理（例: リダイレクト、メッセージ表示など）
+        return redirect('/thanks');
+    }
+
+    public function processLogin(Request $request)
+    {
+        // ユーザーの入力値を取得
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        // ユーザー認証を行う
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // 認証成功時の処理（例: リダイレクト、セッション設定など）
+            return redirect('/menu1');
+        } else {
+            // 認証失敗時の処理（例: エラーメッセージの表示など）
+            return back()->withErrors(['login_error' => 'メールアドレスまたはパスワードが違います。']);
+        }
+    }
+
 }

@@ -9,12 +9,12 @@
   <meta name="generator" content="Hugo 0.84.0">
   <title>Document</title>
   <link rel="stylesheet" href="{{ asset('css/shop_all.css') }}" />
-  <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/"> -->
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- <link rel="stylesheet" href="{{ asset('css/.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('css/.css') }}">
 </head>
 
 

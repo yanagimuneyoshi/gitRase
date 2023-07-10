@@ -17,7 +17,9 @@ body {
   text-align: center;
   font-size: 24px;
 }
-
+a {
+  text-decoration:none;
+}
 .square_btn {
   display: block;
   position: absolute;
