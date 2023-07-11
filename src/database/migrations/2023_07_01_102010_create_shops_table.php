@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateShopsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('shops', function (Blueprint $table) {
@@ -18,20 +13,15 @@ class CreateShopsTable extends Migration
             $table->string('name');
             $table->string('photo');
             $table->string('about');
-            $table->string('area_ID')->references('areasID')->on('areas');
-            $table->string('genre_ID')->references('genresID')->on('genres');
+            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('genre_id');
             $table->timestamps();
 
-            // $table->foreign('area_ID')->references('areasID')->on('areas');
-            // $table->foreign('genre_ID')->references('genresID')->on('genres');
+            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('genre_id')->references('id')->on('genres');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('shops');

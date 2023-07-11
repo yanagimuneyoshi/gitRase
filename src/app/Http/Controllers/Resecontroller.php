@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Shop;
 
 class ReseController extends Controller
 {
     public function shop_all()
     {
-        return view('shop_all');
+        $shops = Shop::all(); // データベースから全ての店舗データを取得
+
+        return view('shop_all', compact('shops'));
+
     }
 
     public function register()

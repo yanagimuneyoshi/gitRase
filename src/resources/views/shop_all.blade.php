@@ -8,10 +8,10 @@
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
   <title>Document</title>
-  <link rel="stylesheet" href="{{ asset('css/shop_all.css') }}" />
+  <link rel="stylesheet" href="css/shop_all.css" />
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -27,19 +27,21 @@
         <div data-v-56ac30e2="" class="area">
           <select data-v-56ac30e2="">
             <option data-v-56ac30e2="" value="" selected="selected">All area</option>
-            <option data-v-56ac30e2="">東京都</option>
-            <option data-v-56ac30e2="">大阪府</option>
-            <option data-v-56ac30e2="">福岡県</option>
+            <option data-v-56ac30e2="" value="東京都">東京都</option>
+            <option data-v-56ac30e2="" value="大阪府">大阪府</option>
+            <option data-v-56ac30e2="" value="福岡県">福岡県</option>
+
           </select>
         </div>
         <div data-v-56ac30e2="" class="genre">
           <select data-v-56ac30e2="">
             <option data-v-56ac30e2="" value="" selected="selected">All genre</option>
-            <option data-v-56ac30e2="">寿司</option>
-            <option data-v-56ac30e2="">焼肉</option>
-            <option data-v-56ac30e2="">居酒屋</option>
-            <option data-v-56ac30e2="">イタリアン</option>
-            <option data-v-56ac30e2="">ラーメン</option>
+            <option data-v-56ac30e2="" value="寿司">寿司</option>
+            <option data-v-56ac30e2="" value="焼肉">焼肉</option>
+            <option data-v-56ac30e2="" value="居酒屋">居酒屋</option>
+            <option data-v-56ac30e2="" value="イタリアン">イタリアン</option>
+            <option data-v-56ac30e2="" value="ラーメン">ラーメン</option>
+
           </select>
         </div>
         <div data-v-56ac30e2="" class="research">
@@ -50,6 +52,7 @@
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+            @foreach ($shops as $shop)
             <div class="col">
               <div class="card shadow-sm">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -57,25 +60,28 @@
                   <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
                 </svg>
                 <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <p class="shop_name">{{ $shop['name'] }}</p>
+                      <p class="area">#{{ $shop['area_id'] }}</p>
+                      <p class="genre">#{{ $shop['genre_id'] }}</p>
+                      <p class="detail">詳しく見る</p>
                     </div>
-                    <i class="far fa-heart favorite-heart"></i>
-                    <small class="text-muted">9 mins</small>
                   </div>
+                  <i class="far fa-heart favorite-heart"></i>
                 </div>
               </div>
             </div>
-            <!-- ... 他のカードの記述 ... -->
+            @endforeach
           </div>
+          <!-- ... 他のカードの記述 ... -->
         </div>
       </div>
-      <div data-v-56ac30e2="" class="flex"></div>
     </div>
+    <div data-v-56ac30e2="" class="flex"></div>
   </div>
+  </div>
+
   <script>
     // お気に入りハートマークをクリックした場合の動作
     document.addEventListener('DOMContentLoaded', function() {
