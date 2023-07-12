@@ -22,6 +22,11 @@ class ReseController extends Controller
         return view('register');
     }
 
+    public function shop_detail()
+    {
+        return view('shop_detail');
+    }
+
     public function thanks()
     {
         return view('thanks');

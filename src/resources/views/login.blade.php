@@ -26,9 +26,6 @@
 
     <form action="{{ route('login') }}" method="POST">
       @csrf
-
-      
-
       <div class="input-group">
         <i class="fa-solid fa-envelope"></i>
         <input type="text" name="email" placeholder="Email">

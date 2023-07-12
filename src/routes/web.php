@@ -23,3 +23,6 @@ Route::get('/detail/{shop_id}', [ReseController::class, 'shop_detail']);
 
 Route::get('/done', [ReseController::class, 'done']);
 
+Route::get('/shop_detail', [ReseController::class, 'shop_detail']);
+
+
