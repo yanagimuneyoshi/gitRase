@@ -74,7 +74,6 @@
             </div>
             @endforeach
           </div>
-          <!-- ... 他のカードの記述 ... -->
         </div>
       </div>
     </div>
@@ -83,14 +82,13 @@
   </div>
 
   <script>
-    // お気に入りハートマークをクリックした場合の動作
     document.addEventListener('DOMContentLoaded', function() {
       const favoriteHearts = document.querySelectorAll('.favorite-heart');
       favoriteHearts.forEach((heart) => {
         heart.addEventListener('click', (event) => {
-          event.currentTarget.classList.toggle('fas'); // ハートマークの表示切り替え
+          event.currentTarget.classList.toggle('fas');
           event.currentTarget.classList.toggle('far');
-          event.currentTarget.classList.toggle('text-danger'); // ハートマークの色の切り替え
+          event.currentTarget.classList.toggle('text-danger');
         });
       });
     });
