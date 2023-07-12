@@ -69,3 +69,105 @@
   bottom: calc(50% - 1px);
   transform: rotate(-135deg);
 }
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.left-section {
+  width: 60%;
+}
+
+.left-section h2 {
+  font-size: 24px;
+}
+
+.left-section img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.left-section p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.left-section .about {
+  margin-top: 20px;
+}
+
+.left-section .about h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.left-section .about p {
+  font-size: 16px;
+}
+
+.right-section {
+  width: 50%;
+  background-color: rgb(00, 115, 246);
+  padding: 30px;
+}
+
+.right-section h2 {
+  font-size: 24px;
+}
+
+.right-section form {
+  margin-top: 20px;
+}
+
+.right-section .form-group {
+  margin-bottom: 10px;
+}
+
+.right-section label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.right-section input[type="date"] {
+  width: 40%;
+  padding: 8px;
+  font-size: 16px;
+}
+.right-section input[type="time"],
+.right-section input[type="number"] {
+  width: 80%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.submit {
+
+}
+
+.submit-all {
+  /* padding: ; */
+  background-color: #0a0a97;
+
+
+}
+
+
+.right-section .reservation-summary {
+  margin-top: 30px;
+}
+
+.right-section .reservation-summary h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.right-section .reservation-summary p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
