@@ -62,13 +62,21 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <p class="shop_name">{{ $shop['name'] }}</p>
-                      <p class="area">#{{ $shop['area_id'] }}</p>
-                      <p class="genre">#{{ $shop['genre_id'] }}</p>
+                      <p class="shop_name">{{ $shop->name }}</p>
+                      @foreach ($areas as $area)
+                      @if ($area->id == $shop->area_id)
+                      <p class="area">#{{ $area->name }}</p>
+                      @endif
+                      @endforeach
+                      @foreach ($genres as $genre)
+                      @if ($genre->id == $shop->genre_id)
+                      <p class="genre">#{{ $genre->name }}</p>
+                      @endif
+                      @endforeach
                       <p class="detail">詳しく見る</p>
+                      <i class="far fa-heart favorite-heart"></i>
                     </div>
                   </div>
-                  <i class="far fa-heart favorite-heart"></i>
                 </div>
               </div>
             </div>

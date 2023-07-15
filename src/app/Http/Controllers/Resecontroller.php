@@ -6,16 +6,21 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Shop;
+use App\Models\Area;
+use App\Models\Genre;
 
 class ReseController extends Controller
 {
     public function shop_all()
     {
         $shops = Shop::all();
+        $areas = Area::all();
+        $genres = Genre::all();
 
-        return view('shop_all', compact('shops'));
-
+        return view('shop_all', compact('shops', 'areas', 'genres'));
     }
+
+
 
     public function register()
     {
@@ -101,5 +106,4 @@ class ReseController extends Controller
             return back()->withErrors(['login_error' => 'メールアドレスまたはパスワードが違います。']);
         }
     }
-
 }
