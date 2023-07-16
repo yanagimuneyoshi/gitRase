@@ -13,8 +13,8 @@ class CreateShopsTable extends Migration
       $table->string('name');
       $table->string('photo');
       $table->string('about');
-      $table->unsignedBigInteger('area_id');
-      $table->unsignedBigInteger('genre_id');
+      $table->string('area_id')->references('areasID')->on('areas');;
+      $table->string('genre_id')->references('genresID')->on('genres');;
       $table->timestamps();
 
       // $table->foreign('area_id')->references('id')->on('areas');

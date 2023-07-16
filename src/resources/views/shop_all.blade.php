@@ -74,7 +74,11 @@
                       @endif
                       @endforeach
                       <p class="detail">詳しく見る</p>
-                      <i class="far fa-heart favorite-heart"></i>
+                      <form action="{{ route('favorite') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+                        <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -87,7 +91,7 @@
     </div>
     <div data-v-56ac30e2="" class="flex"></div>
   </div>
-  </div>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

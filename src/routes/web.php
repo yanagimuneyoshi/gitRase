@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReseController;
+use App\Http\Controllers\FavoriteController;
 
 Route::get('/', [ReseController::class, 'shop_all']);
+Route::post('/', [FavoriteController::class, 'processFavorite'])->name('favorite');
+
 
 Route::get('/menu1', [ReseController::class, 'menu1']);
 
