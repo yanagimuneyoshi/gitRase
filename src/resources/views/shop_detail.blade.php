@@ -33,7 +33,7 @@
 
     <div class="right-section">
       <h2>予約する</h2>
-      <form action="/reservation" method="POST">
+      <form action="{{ route('reservation.store') }}" method="POST">
         @csrf
         <div class="form-group">
           <label for="date">日付</label>
@@ -45,22 +45,44 @@
         </div>
         <div class="form-group">
           <label for="guests">人数</label>
-          <input type="number" id="guests" name="guests" required>
+          <input type="number" id="guests" name="guests" min="0" required>
+        </div>
+
+        <div class="reservation-summary">
+          <h2>予約内容</h2>
+          <p>店舗名: ショップ名</p>
+          <p>日付: <span id="selected-date"></span></p>
+          <p>時間: <span id="selected-time"></span></p>
+          <p>人数: <span id="selected-guests"></span></p>
+        </div>
+
+        <div class="submit-all" href="/">
+          @csrf
+          <button type="submit">予約する</button>
         </div>
       </form>
-
-      <div class="reservation-summary">
-        <h2>予約内容</h2>
-        <p>店舗名: ショップ名</p>
-        <p>日付: 選択された日付</p>
-        <p>時間: 選択された時間</p>
-        <p>人数: 選択された人数</p>
-      </div>
-      <div class="submit-all">
-        <button type="submit">予約する</button>
-      </div>
     </div>
   </div>
 </body>
 
 </html>
+
+<script>
+  // フォームの入力値が変更されたときに呼び出される関数
+  function updateReservationSummary() {
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const guests = document.getElementById('guests').value;
+
+    document.getElementById('selected-date').textContent = date;
+    document.getElementById('selected-time').textContent = time;
+    document.getElementById('selected-guests').textContent = guests;
+  }
+
+  // フォームの入力値が変更されたときにupdateReservationSummary関数を呼び出す
+  document.getElementById('date').addEventListener('change', updateReservationSummary);
+  document.getElementById('time').addEventListener('change', updateReservationSummary);
+  document.getElementById('guests').addEventListener('input', updateReservationSummary);
+</script>
+
+</div>

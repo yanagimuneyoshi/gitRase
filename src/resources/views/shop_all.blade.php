@@ -27,29 +27,25 @@
         <div data-v-56ac30e2="" class="area">
           <select data-v-56ac30e2="">
             <option data-v-56ac30e2="" value="" selected="selected">All area</option>
-            <option data-v-56ac30e2="" value="東京都">東京都</option>
-            <option data-v-56ac30e2="" value="大阪府">大阪府</option>
-            <option data-v-56ac30e2="" value="福岡県">福岡県</option>
-
+            @foreach ($areas as $area)
+            <option data-v-56ac30e2="" value="{{ $area->id }}">{{ $area->name }}</option>
+            @endforeach
           </select>
         </div>
         <div data-v-56ac30e2="" class="genre">
           <select data-v-56ac30e2="">
             <option data-v-56ac30e2="" value="" selected="selected">All genre</option>
-            <option data-v-56ac30e2="" value="寿司">寿司</option>
-            <option data-v-56ac30e2="" value="焼肉">焼肉</option>
-            <option data-v-56ac30e2="" value="居酒屋">居酒屋</option>
-            <option data-v-56ac30e2="" value="イタリアン">イタリアン</option>
-            <option data-v-56ac30e2="" value="ラーメン">ラーメン</option>
-
+            @foreach ($genres as $genre)
+            <option data-v-56ac30e2="" value="{{ $genre->id }}">{{ $genre->name }}</option>
+            @endforeach
           </select>
         </div>
         <div data-v-56ac30e2="" class="research">
           <i data-v-56ac30e2="" class="fas fa-search check"></i>
-          <input data-v-56ac30e2="" type="text" placeholder="Search…">
+          <input data-v-56ac30e2="" type="text" name="Search" value="{{ old('search') }}">
         </div>
       </div>
-      <div class="album py-5 bg-light">
+      <div class=" album py-5 bg-light">
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             @foreach ($shops as $shop)
@@ -73,7 +69,9 @@
                       <p class="genre">#{{ $genre->name }}</p>
                       @endif
                       @endforeach
-                      <p class="detail">詳しく見る</p>
+                      <a href="/shop_detail">
+                        <p class="detail">詳しく見る</p>
+                      </a>
                       <form action="{{ route('favorite') }}" method="POST">
                         @csrf
                         <input type="hidden" name="shop_id" value="{{ $shop->id }}">
@@ -104,6 +102,26 @@
         });
       });
     });
+
+// 検索キー
+    document.getElementById('search-input').addEventListener('keydown', function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault(); // デフォルトのEnterキーの動作を無効化
+        performSearch(); // 検索を実行する関数を呼び出す
+      }
+    });
+
+    // 検索を実行する関数の定義
+    function performSearch() {
+      var searchInput = document.getElementById('search-input');
+      var searchTerm = searchInput.value;
+
+      // searchTermを使って検索の処理を実行する（例：Ajaxリクエストなど）
+      // ...
+
+      // フォームの送信処理が必要な場合は、以下のコードを追加
+      // document.getElementById('search-form').submit();
+    }
   </script>
 </body>
 

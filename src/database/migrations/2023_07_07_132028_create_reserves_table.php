@@ -15,15 +15,14 @@ class CreateReservesTable extends Migration
   {
     Schema::create('reserves', function (Blueprint $table) {
       $table->id();
-      $table->string('shop_ID')->references('shopID')->on('shops');
-      $table->string('user_ID')->references('userID')->on('users');
+      $table->unsignedBigInteger('shop_ID');
+      $table->foreign('shop_ID')->references('shopID')->on('shops');
+      $table->unsignedBigInteger('user_ID');
+      $table->foreign('user_ID')->references('userID')->on('users');
       $table->date('date');
       $table->string('time');
       $table->string('people');
       $table->timestamps();
-
-      // $table->foreign('shop_ID')->references('shopID')->on('shops');
-      // $table->foreign('user_ID')->references('userID')->on('users');
     });
   }
 
