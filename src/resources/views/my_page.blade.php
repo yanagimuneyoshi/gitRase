@@ -16,13 +16,14 @@
 </head>
 
 <header>
-  <div class="menu-button">
-    <button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button>
+  <div class="menu-button-1">
+    <div class="menu-button">
+      <a href="/"><button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button></a>
+    </div>
+    <div class="rese">
+      <p class="RESE-1">RESE</p>
+    </div>
   </div>
-  <div class="rese">
-    <a>Rese</a>
-  </div>
-
 </header>
 
 <body>
@@ -41,7 +42,7 @@
         <p class="shop_name">name</p>
         <p class="Date">date</p>
         <p class="Time">Time</p>
-        <p class="Number">1人</p>
+        <p class="Number">Number</p>
       </div>
     </div>
     <div data-v-40d1da2a="" class="likes">

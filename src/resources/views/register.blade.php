@@ -7,21 +7,23 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-  <style>
+  <!-- <style>
     .error-message {
       color: red;
       font-size: 14px;
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
   <header>
-    <div class="menu-button">
-      <a href="/menu2"><button id="btn_menu8" class="btn_menu"><span>MENU</span></button></a>
-    </div>
-    <div class="rese">
-      RESE
+    <div class="menu-button-1">
+      <div class="menu-button">
+        <a href="/menu2"><button id="btn_menu8" class="btn_menu"><span>MENU</span></button></a>
+      </div>
+      <div class="rese">
+        <p class="RESE-1">RESE</p>
+      </div>
     </div>
   </header>
 

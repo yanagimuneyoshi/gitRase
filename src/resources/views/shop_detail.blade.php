@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
   <meta charset="UTF-8">
@@ -10,13 +10,13 @@
 
 <body>
   <header>
-    <a href="/">
+    <div class="menu-button-1">
       <div class="menu-button">
-        <button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button>
+        <a href="/"><button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button></a>
       </div>
-    </a>
-    <div class="rese">
-      <a>RESE</a>
+      <div class="rese">
+        <p class="RESE-1">RESE</p>
+      </div>
     </div>
   </header>
   <div class="container">

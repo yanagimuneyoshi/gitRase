@@ -9,8 +9,20 @@ header {
   align-items: flex-start;
 }
 
+.menu-button-1 {
+  display: flex;
+  margin: 50px 0px 0px 200px;
+}
+
 .rese {
+  margin: -10px 30px 0px 30px;
+}
+
+
+.RESE-1 {
   color: #0000FF;
+  font-size: 50px;
+
 }
 
 
@@ -85,12 +97,6 @@ header {
   bottom: calc(50% - 1px);
   transform: rotate(-135deg);
 }
-
-.menu-button {
-  margin-right: 100px;
-}
-
-
 
 
 .user[data-v-40d1da2a] {

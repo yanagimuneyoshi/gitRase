@@ -1,3 +1,31 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.menu-button-1 {
+  display: flex;
+  margin: 50px 0px 0px 200px;
+}
+
+.rese {
+  margin: -60px 30px 0px 30px;
+}
+
+
+.RESE-1 {
+  color: #0000FF;
+  font-size: 50px;
+
+}
+
+
 #btn_menu8 {
   position: relative;
   display: flex;
@@ -69,7 +97,6 @@
   bottom: calc(50% - 1px);
   transform: rotate(-135deg);
 }
-
 
 .container {
   display: flex;
@@ -170,4 +197,9 @@
 .right-section .reservation-summary p {
   font-size: 16px;
   margin-bottom: 5px;
+}
+
+.left-section {
+  margin: auto;
+  padding: 5%;
 }

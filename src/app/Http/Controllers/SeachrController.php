@@ -9,11 +9,20 @@ class SearchController extends Controller
 {
   public function search(Request $request)
   {
-    $search = shop_all::with('category')->CategorySearch($request->area_id)->KeywordSearch($request->keyword)->get();
-    $areas = Category::all();
+    $area = $request->input('areas');
+    $genre = $request->input('genres');
 
-    return view('index', compact('todos', 'categories'));
+    $query = Contact::select('areas','genres');
 
-    // return view('search_results', compact('results'));
+    if ($area) {
+        $query->where('areas', 'LIKE', '%', $area. '%');
+    }
+
+    if ($genre) {
+      $query->where('genres', 'LIKE', '%', $genre . '%');
+    }
+
+
+    return view('shop_all', compact('search'));
   }
 }

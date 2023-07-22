@@ -10,13 +10,14 @@
 
 
 <header>
-  <div class="menu-button">
-    <a href="/"><button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button></a>
+  <div class="menu-button-1">
+    <div class="menu-button">
+      <a href="/"><button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button></a>
+    </div>
+    <div class="rese">
+      <p class="RESE-1">RESE</p>
+    </div>
   </div>
-  <div class="rese">
-    <a>Rese</a>
-  </div>
-
 </header>
 <div class="done">
   <div class="thanks-message">

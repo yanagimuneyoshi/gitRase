@@ -30,12 +30,12 @@ Route::get('/detail/{shop_id}', [ReseController::class, 'shop_detail']);
 Route::get('/done', [ReseController::class, 'done']);
 
 Route::get('/shop_detail', [ReseController::class, 'shop_detail']);
-Route::get('/shop_detail/{shop_id}', [ShopController::class, 'shop_detail'])->name('shop_detail');
+// Route::get('/shop_detail/{shop_id}', [ShopController::class, 'shop_detail'])->name('shop_detail');
 Route::get('/shop_detail/{id}', 'ShopController@show')->name('shop.detail');
 
 
-Route::post('/search', [SearchController::class, 'search'])->name('search');
-
+Route::post('/search', [SearchController::class, 'search']);
+Route::get('/search', [ShopController::class, 'search'])->name('search');
 
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 

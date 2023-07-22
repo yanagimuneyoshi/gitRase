@@ -8,20 +8,21 @@
   <link rel="stylesheet" href="{{ asset('css/done.css') }}">
 </head>
 
-
 <header>
-  <div class="menu-button">
-    <button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button>
-  </div>
-  <div class="rese">
-    <a>Rese</a>
+  <div class="menu-button-1">
+    <div class="menu-button">
+      <a href="/"><button id="btn_menu8" class="btn_menu" href="#"><span>MENU</span></button></a>
+    </div>
+    <div class="rese">
+      <p class="RESE-1">RESE</p>
+    </div>
   </div>
 
 </header>
 <div class="done">
-  <div class="done-message">
+  <div class="thanks-message">
     <div class="message">ご予約ありがとうございます</div>
-    <button class="back-button">戻る</button>
+    <a href="/"><button class="back-button">戻る</button></a>
   </div>
 </div>
 </body>

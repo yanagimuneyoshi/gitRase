@@ -17,7 +17,7 @@
       </div>
     </a>
     <div class="rese">
-      <a>RESE</a>
+      <p class="RESE-1">RESE</p>
     </div>
   </header>
 
