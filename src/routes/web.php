@@ -23,6 +23,9 @@ Route::get('/thanks', [ReseController::class, 'thanks'])->name('thanks');
 Route::get('/login', [ReseController::class, 'login'])->name('login');
 Route::post('/login', [ReseController::class, 'processLogin']);
 
+Route::get('/logout', [ReseController::class, 'logout'])->name('logout');
+Route::post('/logout', [ReseController::class, 'logout']);
+
 Route::get('/my_page', [ReseController::class, 'my_page']);
 
 Route::get('/detail/{shop_id}', [ReseController::class, 'shop_detail']);
@@ -35,7 +38,7 @@ Route::get('/shop_detail/{id}', 'ShopController@show')->name('shop.detail');
 
 
 Route::post('/search', [SearchController::class, 'search']);
-Route::get('/search', [ShopController::class, 'search'])->name('search');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 

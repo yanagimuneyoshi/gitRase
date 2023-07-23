@@ -13,9 +13,13 @@
 </header>
 
 <body>
-  <a href="/"><div class="home">Home</div></a>
-  <a href="/menu2"><div class="logout">Logout</div></a>
-  <a href="/my_page"><div class="mypage">Mypage</div></a>
+  <a href="/">
+    <div class="home">Home</div>
+  </a>
+  <a href="{{route('logout')}}"><div class="logout">Logout</div></a>
+  <a href="/my_page">
+    <div class="mypage">Mypage</div>
+  </a>
 </body>
 
 </html>

@@ -106,4 +106,11 @@ class ReseController extends Controller
             return back()->withErrors(['login_error' => 'メールアドレスまたはパスワードが違います。']);
         }
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
 }

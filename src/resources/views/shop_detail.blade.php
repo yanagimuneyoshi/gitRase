@@ -1,3 +1,20 @@
+<?php
+
+use Illuminate\Support\Facades\Auth;
+// use Auth;
+if (Auth::check()) {
+
+} else {
+  echo '<a href="/login">ログイン画面へ</a>';
+  return;
+  // ログインしていないときの処理
+  // return  view ('/login');
+  // return redirect()->route('login');
+  // return Redirect::to('login');
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
