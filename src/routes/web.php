@@ -5,9 +5,12 @@ use App\Http\Controllers\ReseController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SearchController;
 
 
 Route::get('/', [ReseController::class, 'shop_all']);
+Route::get('/', [shopController::class, 'search']);
+
 Route::post('/', [FavoriteController::class, 'processFavorite'])->name('favorite');
 
 
@@ -36,8 +39,10 @@ Route::get('/shop_detail', [ReseController::class, 'shop_detail']);
 // Route::get('/shop_detail/{shop_id}', [ShopController::class, 'shop_detail'])->name('shop_detail');
 Route::get('/shop_detail/{id}', 'ShopController@show')->name('shop.detail');
 
+Route::post('/search', [ShopController::class, 'search'])->name('search');
+// Route::post('/search', [SearchController::class, 'search']);
+// Route::post('/search', [SearchController::class, 'search'])->name('search');
 
-Route::post('/search', [SearchController::class, 'search']);
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');

@@ -1,45 +1,47 @@
-<?php
-
-namespace App\Http\Controllers;
 
 
-use App\Models\Shop;
-use Illuminate\Http\Request;
 
-class SearchController extends Controller
-{
-  public function search(Request $request)
-  {
-    logger('test', ['foo' => 'bar']);
-    $area = $request->input('areas');
-    $genre = $request->input('genres');
-    $keyword = $request->input('keyword');
+// use App\Models\Shop;
+// use Illuminate\Http\Request;
 
-    $query = shop::select();
+// class SearchController extends Controller
+// 
+//   // SearchController.php
+//   public function search(Request $request)
+//   {
+//     logger('test', ['foo' => 'bar']);
+//     $area = $request->input('all_areas');
+//     $genre = $request->input('all_genres');
+//     $keyword = $request->input('keyword');
 
-    if ($area) {
-        $query->where('area_id', '=', $area);
-    }
+//     $query = Shop::select();
 
-    if ($genre) {
-      $query->where('genre_id', '=', $genre);
-    }
+//     if ($area) {
+//       $query->where('area_id', '=', $area);
+//     }
 
-    if ($keyword) {
-      $query->where('name', '=', $keyword);
-    }
+//     if ($genre) {
+//       $query->where('genre_id', '=', $genre);
+//     }
 
-    $query->get();
+//     if ($keyword) {
+//       $query->where('name', 'like', '%' . $keyword . '%');
+//     }
 
-    $ids = array();
-    foreach ($query as $q) {
-      $ids[] = $q->id();
-    }
+//     // $results = $query->get();
 
-    echo json_encode($ids);
-    return;
+//     // 検索結果をビューに渡す
+//     // return view('shop_all', compact('results'));
+//     //
+//     $results = $query->get();
+//     $areas = Area::all();
+//     $genres = Genre::all();
+
+//     return view('shop_all', compact('results', 'areas', 'genres'));
+//   }
 
 
-    // return view('shop_all', compact('search'));
-  }
-}
+
+//     // return view('shop_all', compact('search'));
+
+
