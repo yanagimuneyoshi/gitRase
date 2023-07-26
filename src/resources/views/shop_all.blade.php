@@ -96,168 +96,145 @@
     </div>
     <div data-v-56ac30e2="" class="flex"></div>
   </div>
+</body>
 
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const favoriteHearts = document.querySelectorAll('.favorite-heart');
-      favoriteHearts.forEach((heart) => {
-        heart.addEventListener('click', (event) => {
-          event.currentTarget.classList.toggle('fas');
-          event.currentTarget.classList.toggle('far');
-          event.currentTarget.classList.toggle('text-danger');
-        });
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const favoriteHearts = document.querySelectorAll('.favorite-heart');
+    favoriteHearts.forEach((heart) => {
+      heart.addEventListener('click', (event) => {
+        event.currentTarget.classList.toggle('fas');
+        event.currentTarget.classList.toggle('far');
+        event.currentTarget.classList.toggle('text-danger');
       });
-
-      document.getElementById('search-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        performSearch();
-      });
-
-      // 検索キー
-      document.getElementById('search-input').addEventListener('keydown', function(event) {
-        if (event.keyCode === 13) {
-          performSearch();
-        }
-      });
-
-
-      // document.querySelector('.area select').addEventListener('change', performSearch);
-      // document.querySelector('.genre select').addEventListener('change', performSearch);
-      document.getElementById('area-select').addEventListener('change', performSearch);
-      document.getElementById('genre-select').addEventListener('change', performSearch);
     });
 
-    var area = ""; // Declare 'area' outside the performSearch function
-    var genre = ""; // Declare 'genre' outside the performSearch function
-    var searchInput = "";
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      performSearch();
+    });
 
-    // Update the performSearch function
-    function performSearch() {
-      var areaSelect = document.getElementById('area-select');
-      var genreSelect = document.getElementById('genre-select');
-      area = areaSelect.options[areaSelect.selectedIndex].value;
-      genre = genreSelect.options[genreSelect.selectedIndex].value;
-      var searchInput = document.getElementById('search-input').value;
-
-      // Ensure that 'area' and 'genre' are not null or empty before sending the Ajax request
-      if (!area) area = ""; // If 'area' is null or empty, set it to an empty string
-      if (!genre) genre = ""; // If 'genre' is null or empty, set it to an empty string
-    }
-
-    $.ajax({
-        url: "{{ route('search') }}",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          _token: '{{ csrf_token() }}', // CSRFトークンを追加
-          all_areas: area,
-          all_genres: genre,
-          keyword: searchInput,
-        },
-        timeout: 5000,
-      })
-      // .done(function(ids) {
-      //   alert('success');
-      // })
-      // .done(function(ids) {
-      //   displayResults(ids); // 検索結果を表示する関数を呼び出す
-      // })
-      // .done(function(response) {
-      //   displayResults(response); // Pass the filtered data to the displayResults function
-      // })
-      .done(function(response) {
-        if (typeof response === 'string') {
-          response = JSON.parse(response); // If the response is a string (e.g., when using PHP without JSON response), parse it
-        }
-        displayResults(response); // Pass the filtered data to the displayResults function
-      })
-
-      .fail(function() {
-        alert('Failed to fetch data. Please try again later.');
-      });
-
-    // .fail(function() {
-    //   alert('failed');
-    // });
-
-    // function displayResults(ids) {
-    //   var resultsDiv = document.getElementById('search-results');
-    //   resultsDiv.innerHTML = ''; // 一度表示された結果をクリア
-
-    function displayResults(data) {
-
-      var resultsDiv = document.getElementById('search-results');
-      resultsDiv.innerHTML = ''; // Clear previous results
-
-      if (data.length > 0) {
-        data.forEach(function(shop) {
-          var card = createCard(shop); // Create a card for each shop
-          resultsDiv.appendChild(card);
-        });
-      } else {
-        // Show a message when no results found
-        var noResults = document.createElement('p');
-        noResults.innerText = 'No results found.';
-        resultsDiv.appendChild(noResults);
-        }
+    // 検索キー
+    document.getElementById('search-input').addEventListener('keydown', function(event) {
+      if (event.keyCode === 13) {
+        performSearch();
       }
+    });
 
 
-    function createCard(shop) {
-      // Create a card element and set its content based on the shop data
-      var card = document.createElement('div');
+    // document.querySelector('.area select').addEventListener('change', performSearch);
+    // document.querySelector('.genre select').addEventListener('change', performSearch);
+    document.getElementById('area-select').addEventListener('change', performSearch);
+    document.getElementById('genre-select').addEventListener('change', performSearch);
+  });
+
+  var area = ""; // Declare 'area' outside the performSearch function
+  var genre = ""; // Declare 'genre' outside the performSearch function
+  var searchInput = "";
+
+  // Update the performSearch function
+  function performSearch() {
+    var areaSelect = document.getElementById('area-select');
+    var genreSelect = document.getElementById('genre-select');
+    area = areaSelect.options[areaSelect.selectedIndex].value;
+    genre = genreSelect.options[genreSelect.selectedIndex].value;
+    var searchInput = document.getElementById('search-input').value;
+
+    // Ensure that 'area' and 'genre' are not null or empty before sending the Ajax request
+    if (!area) area = ""; // If 'area' is null or empty, set it to an empty string
+    if (!genre) genre = ""; // If 'genre' is null or empty, set it to an empty string
+  }
+
+  $.ajax({
+      url: "{{ route('search') }}",
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        _token: '{{ csrf_token() }}', // CSRFトークンを追加
+        all_areas: area,
+        all_genres: genre,
+        keyword: searchInput,
+      },
+      timeout: 5000,
+    })
+    // .done(function(ids) {
+    //   alert('success');
+    // })
+    // .done(function(ids) {
+    //   displayResults(ids); // 検索結果を表示する関数を呼び出す
+    // })
+    // .done(function(response) {
+    //   displayResults(response); // Pass the filtered data to the displayResults function
+    // })
+    .done(function(response) {
+      if (typeof response === 'string') {
+        response = JSON.parse(response); // If the response is a string (e.g., when using PHP without JSON response), parse it
+      }
+      displayResults(response); // Pass the filtered data to the displayResults function
+    })
+
+    .fail(function() {
+      alert('Failed to fetch data. Please try again later.');
+    });
+
+  // .fail(function() {
+  //   alert('failed');
+  // });
+
+  // function displayResults(ids) {
+  //   var resultsDiv = document.getElementById('search-results');
+  //   resultsDiv.innerHTML = ''; // 一度表示された結果をクリア
+
+  function displayResults(data) {
+
+    var resultsDiv = document.getElementById('search-results');
+    resultsDiv.innerHTML = ''; // Clear previous results
+
+    if (data.length > 0) {
+      data.forEach(function(shop) {
+        var card = createCard(shop); // Create a card for each shop
+        resultsDiv.appendChild(card);
+      });
+    } else {
+      // Show a message when no results found
+      var noResults = document.createElement('p');
+      noResults.innerText = 'No results found.';
+      resultsDiv.appendChild(noResults);
+    }
+  }
+
+
+  function createCard(shop) {
+    // Create a card element and set its content based on the shop data
+    var card = document.createElement('div');
       card.className = 'col';
       card.innerHTML = `
-      <div class="card shadow-sm">
-        <img src="${shop.photo}" class="bd-placeholder-img card-img-top" width="100%" height="225" />
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <p class="shop_name">${shop.name}</p>
-              <p class="area">#${shop.area.name}</p>
-              <p class="genre">#${shop.genre.name}</p>
-              <a href="/shop_detail/${shop.id}">
-                <p class="detail">詳しく見る</p>
-              </a>
-              <form action="{{ route('favorite') }}" method="POST">
-                @csrf
-                <input type="hidden" name="shop_id" value="${shop.id}">
-                <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
-              </form>
+        <div class="card shadow-sm">
+          <img src="${shop.photo}" class="bd-placeholder-img card-img-top" width="100%" height="225" />
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <p class="shop_name">${shop.name}</p>
+                <p class="area">#${shop.area.name}</p>
+                <p class="genre">#${shop.genre.name}</p>
+                <a href="/shop_detail/${shop.id}">
+                  <p class="detail">詳しく見る</p>
+                </a>
+                <form action="{{ route('favorite') }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="shop_id" value="${shop.id}">
+                  <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      `;
-
-        return card;
+        `;
       }
-    }
+      return card;
 
 
-
-
-    // if (ids.length > 0) {
-    //   // 検索結果がある場合、カードを作成して結果を表示
-    //   ids.forEach(function(id) {
-    //     var card = createCard(id); // idに基づいてカードを作成
-    //     resultsDiv.appendChild(card); // カードを結果表示エリアに追加
-    //   });
-    // } else {
-    //   // 検索結果がない場合、メッセージを表示
-    //   var noResults = document.createElement('p');
-    //   noResults.innerText = 'No results found.';
-    //   resultsDiv.appendChild(noResults);
-    // }
-
-
-    // idに基づいてカードを作成する関数の定義
-    // function createCard(id) {
-    // カードの作成処理（省略）
-    // カードの内容を表示する部分を適切に設定し、カードを返す
-    // (shopの情報を取得して、カードに表示するなど)
-  </script>
+</script>
 </body>
 
 </html>

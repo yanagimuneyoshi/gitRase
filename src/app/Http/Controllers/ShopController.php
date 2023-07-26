@@ -26,17 +26,12 @@ class ShopController extends Controller
   {
     $areas = Area::all();
     $genres = Genre::all();
+    $shops = Shop::all();
 
-    $searchTerm = $request->input('Search');
-
-    
-    // 検索処理を行い、$shopsに検索結果を格納するなどのコードを追加
-
-    // 例：nameカラムが検索ワードを含む店舗を取得する例
-    $shops = Shop::where('name', 'like', '%' . $searchTerm . '%')->get();
+    // ... 検索のロジック ...
 
     return view('shop_all', compact('shops', 'areas', 'genres'));
-  }
+}
 
 
 
