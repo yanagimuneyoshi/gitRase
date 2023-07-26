@@ -7,6 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Document</title>
   <link rel="stylesheet" href="css/shop_all.css" />
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -99,6 +100,11 @@
 </body>
 
 <script>
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
   document.addEventListener('DOMContentLoaded', function() {
     const favoriteHearts = document.querySelectorAll('.favorite-heart');
     favoriteHearts.forEach((heart) => {
@@ -136,47 +142,58 @@
   function performSearch() {
     var areaSelect = document.getElementById('area-select');
     var genreSelect = document.getElementById('genre-select');
-    area = areaSelect.options[areaSelect.selectedIndex].value;
-    genre = genreSelect.options[genreSelect.selectedIndex].value;
+    var areaValue = areaSelect.options[areaSelect.selectedIndex].value;
+    var genreValue = genreSelect.options[genreSelect.selectedIndex].value;
     var searchInput = document.getElementById('search-input').value;
 
-    // Ensure that 'area' and 'genre' are not null or empty before sending the Ajax request
-    if (!area) area = ""; // If 'area' is null or empty, set it to an empty string
-    if (!genre) genre = ""; // If 'genre' is null or empty, set it to an empty string
+    // 未選択の場合に空の値を設定
+    var area = areaValue === "" ? "all" : areaValue;
+    var genre = genreValue === "" ? "all" : genreValue;
+
+    //   // クライアント側から送信するデータをオブジェクトとして作成
+    //   var formData = {
+    //     all_areas: document.getElementById('area-select').value,
+    //     all_genres: document.getElementById('genre-select').value,
+    //     keyword: document.getElementById('search-input').value
+    //   };
+    console.log(area, 'area');
+    console.log(genre, 'genre');
+    console.log(searchInput, 'keyword');
+    $.ajax({
+        url: "{{ route('search') }}",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          all_areas: area,
+          all_genres: genre,
+          keyword: searchInput
+        }, // データをJSON形式に変換して送信
+        // contentType: 'application/json', // リクエストのContent-TypeをJSONに指定
+        timeout: 5000,
+        //   success: function(response) {
+        //     // リクエストが成功した場合の処理
+        //     displayResults(response);
+        //   },
+        //   error: function() {
+        //     // リクエストが失敗した場合の処理
+        //     alert('Failed to fetch data. Please try again later.');
+        //   }
+        // });
+      })
+
+
+      .done(function(response) {
+        if (typeof response === 'string') {
+          response = JSON.parse(response); // If the response is a string (e.g., when using PHP without JSON response), parse it
+        }
+        displayResults(response); // Pass the filtered data to the displayResults function
+      })
+
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        alert('Failed to fetch data. Please try again later.');
+      });
+
   }
-
-  $.ajax({
-      url: "{{ route('search') }}",
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        _token: '{{ csrf_token() }}', // CSRFトークンを追加
-        all_areas: area,
-        all_genres: genre,
-        keyword: searchInput,
-      },
-      timeout: 5000,
-    })
-    // .done(function(ids) {
-    //   alert('success');
-    // })
-    // .done(function(ids) {
-    //   displayResults(ids); // 検索結果を表示する関数を呼び出す
-    // })
-    // .done(function(response) {
-    //   displayResults(response); // Pass the filtered data to the displayResults function
-    // })
-    .done(function(response) {
-      if (typeof response === 'string') {
-        response = JSON.parse(response); // If the response is a string (e.g., when using PHP without JSON response), parse it
-      }
-      displayResults(response); // Pass the filtered data to the displayResults function
-    })
-
-    .fail(function() {
-      alert('Failed to fetch data. Please try again later.');
-    });
-
   // .fail(function() {
   //   alert('failed');
   // });
@@ -205,35 +222,33 @@
 
 
   function createCard(shop) {
-    // Create a card element and set its content based on the shop data
+    // カード要素を作成し、ショップデータに基づいて内容を設定する
     var card = document.createElement('div');
-      card.className = 'col';
-      card.innerHTML = `
-        <div class="card shadow-sm">
-          <img src="${shop.photo}" class="bd-placeholder-img card-img-top" width="100%" height="225" />
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <p class="shop_name">${shop.name}</p>
-                <p class="area">#${shop.area.name}</p>
-                <p class="genre">#${shop.genre.name}</p>
-                <a href="/shop_detail/${shop.id}">
-                  <p class="detail">詳しく見る</p>
-                </a>
-                <form action="{{ route('favorite') }}" method="POST">
-                  @csrf
-                  <input type="hidden" name="shop_id" value="${shop.id}">
-                  <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
-                </form>
-              </div>
+    card.className = 'col';
+    card.innerHTML = `
+      <div class="card shadow-sm">
+        <img src="${shop.photo}" class="bd-placeholder-img card-img-top" width="100%" height="225" />
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <p class="shop_name">${shop.name}</p>
+              <p class="area">#${shop.area.name}</p>
+              <p class="genre">#${shop.genre.name}</p>
+              <a href="/shop_detail/${shop.id}">
+                <p class="detail">詳しく見る</p>
+              </a>
+              <form action="{{ route('favorite') }}" method="POST">
+                @csrf
+                <input type="hidden" name="shop_id" value="${shop.id}">
+                <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
+              </form>
             </div>
           </div>
         </div>
-        `;
-      }
-      return card;
-
-
+      </div>
+    `;
+    return card;
+  }
 </script>
 </body>
 
