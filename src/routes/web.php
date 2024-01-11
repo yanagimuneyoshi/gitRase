@@ -8,10 +8,10 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SearchController;
 
 
-Route::get('/', [ReseController::class, 'shop_all']);
-Route::get('/', [shopController::class, 'search']);
-
-Route::post('/', [FavoriteController::class, 'processFavorite'])->name('favorite');
+Route::get('/', [ReseController::class, 'shop_all'])->name('shop_all');
+//Route::get('/', [ShopController::class, 'search']);
+//Route::post('/', [FavoriteController::class, 'processFavorite'])->name('favorite');
+Route::post('/favorite', [FavoriteController::class, 'processFavorite'])->name('favorite');
 
 
 Route::get('/menu1', [ReseController::class, 'menu1']);

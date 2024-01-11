@@ -28,5 +28,7 @@ class FavoriteController extends Controller
     }
 
     // お気に入り追加後の処理を記述（例: リダイレクトなど）
+    return back();
+  
   }
 }

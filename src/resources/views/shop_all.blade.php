@@ -33,7 +33,7 @@
           <div data-v-56ac30e2="" class="area">
             <select data-v-56ac30e2="" name="all_areas" id="area-select">
               <option data-v-56ac30e2="" value="" selected="selected">All area</option>
-              @foreach ($areas as $area)
+              @foreach ($areas ?? '' as $area)
               <option data-v-56ac30e2="" name="areas" value="{{ $area->id }}">{{ $area->name }}</option>
               @endforeach
             </select>
@@ -66,7 +66,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <p class="shop_name">{{ $shop->name }}</p>
-                      @foreach ($areas as $area)
+                      @foreach ($areas ?? '' as $area)
                       @if ($area->id == $shop->area_id)
                       <p class="area">#{{ $area->name }}</p>
                       @endif
@@ -105,15 +105,50 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-  document.addEventListener('DOMContentLoaded', function() {
-    const favoriteHearts = document.querySelectorAll('.favorite-heart');
-    favoriteHearts.forEach((heart) => {
-      heart.addEventListener('click', (event) => {
-        event.currentTarget.classList.toggle('fas');
-        event.currentTarget.classList.toggle('far');
-        event.currentTarget.classList.toggle('text-danger');
+    document.addEventListener('DOMContentLoaded', function() {
+  const favoriteButtons = document.querySelectorAll('.favorite-heart');
+
+  favoriteButtons.forEach((favoriteButton) => {
+    favoriteButton.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      // ボタンの色を変更
+      favoriteButton.classList.toggle('fas');
+      favoriteButton.classList.toggle('far');
+      favoriteButton.classList.toggle('text-danger');
+
+      // ここでAjaxリクエストを行う
+      const shopId = favoriteButton.previousElementSibling.value;
+
+      $.ajax({
+        url: "{{ route('favorite') }}",
+        type: 'POST',
+        data: {
+          shop_id: shopId,
+          _token: $('meta[name="csrf-token"]').attr('content'),
+        },
+        success: function(response) {
+          // Ajaxリクエストが成功したら何かしらの処理を行う
+          // 例えば、他の要素の更新、ユーザーに通知、など
+        },
+        error: function() {
+          // エラー時の処理を追加する（例: アラート表示など）
+          alert('Failed to toggle favorite status.');
+        }
       });
     });
+  });
+
+
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   const favoriteHearts = document.querySelectorAll('.favorite-heart');
+  //   favoriteHearts.forEach((heart) => {
+  //     heart.addEventListener('click', (event) => {
+  //       event.currentTarget.classList.toggle('fas');
+  //       event.currentTarget.classList.toggle('far');
+  //       event.currentTarget.classList.toggle('text-danger');
+  //     });
+  //   });
 
     document.getElementById('search-form').addEventListener('submit', function(event) {
       event.preventDefault();
