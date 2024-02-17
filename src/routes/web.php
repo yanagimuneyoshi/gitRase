@@ -12,6 +12,8 @@ Route::get('/', [ReseController::class, 'shop_all'])->name('shop_all');
 //Route::get('/', [ShopController::class, 'search']);
 //Route::post('/', [FavoriteController::class, 'processFavorite'])->name('favorite');
 Route::post('/favorite', [FavoriteController::class, 'processFavorite'])->name('favorite');
+Route::post('/favorite/toggle', 'FavoriteController@toggleFavorite')->name('favorite.toggle');
+
 
 
 Route::get('/menu1', [ReseController::class, 'menu1']);

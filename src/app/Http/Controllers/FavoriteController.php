@@ -31,4 +31,14 @@ class FavoriteController extends Controller
     return back();
   
   }
+
+  public function toggleFavorite(Request $request)
+  {
+    $shopId = $request->input('shop_id');
+    $isFavorited = $request->input('is_favorited');
+
+    // ここでお気に入りの登録・削除を実装
+
+    return response()->json(['success' => true]);
+  }
 }

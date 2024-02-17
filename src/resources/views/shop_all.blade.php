@@ -13,7 +13,7 @@
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
 </head>
 
 <body>
@@ -83,7 +83,7 @@
                       <form action="{{ route('favorite') }}" method="POST">
                         @csrf
                         <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                        <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
+                        <button type="submit" class="far fa-heart favorite-heart" onclick="toggleFavorite(this)" data-shop-id="{{ $shop->id }}" name="favorite"></button>
                       </form>
                     </div>
                   </div>
@@ -100,190 +100,219 @@
 </body>
 
 <script>
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-    document.addEventListener('DOMContentLoaded', function() {
-  const favoriteButtons = document.querySelectorAll('.favorite-heart');
+  // お気に入りボタンがクリックされたときの処理
+  function toggleFavorite(button) {
+    const shopId = button.getAttribute('data-shop-id');
+    const isFavorited = button.classList.contains('fas'); // 現在のお気に入り状態を取得
 
-  favoriteButtons.forEach((favoriteButton) => {
-    favoriteButton.addEventListener('click', function(event) {
-      event.preventDefault();
-
-      // ボタンの色を変更
-      favoriteButton.classList.toggle('fas');
-      favoriteButton.classList.toggle('far');
-      favoriteButton.classList.toggle('text-danger');
-
-      // ここでAjaxリクエストを行う
-      const shopId = favoriteButton.previousElementSibling.value;
-
-      $.ajax({
-        url: "{{ route('favorite') }}",
-        type: 'POST',
-        data: {
-          shop_id: shopId,
-          _token: $('meta[name="csrf-token"]').attr('content'),
-        },
-        success: function(response) {
-          // Ajaxリクエストが成功したら何かしらの処理を行う
-          // 例えば、他の要素の更新、ユーザーに通知、など
-        },
-        error: function() {
-          // エラー時の処理を追加する（例: アラート表示など）
-          alert('Failed to toggle favorite status.');
-        }
-      });
+    // Ajaxリクエストを送信
+    $.ajax({
+      url: "{{ route('favorite.toggle') }}",
+      type: 'POST',
+      data: {
+        shop_id: shopId,
+        is_favorited: isFavorited,
+        _token: $('meta[name="csrf-token"]').attr('content'),
+      },
+      success: function(response) {
+        // お気に入りの状態を反転
+        button.classList.toggle('fas', !isFavorited);
+        button.classList.toggle('far', isFavorited);
+        button.classList.toggle('text-danger', !isFavorited);
+      },
+      error: function() {
+        alert('Failed to toggle favorite status.');
+      }
     });
-  });
+  }
+  // $.ajaxSetup({
+  //   headers: {
+  //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //   }
+  // });
+
+
 
 
   // document.addEventListener('DOMContentLoaded', function() {
-  //   const favoriteHearts = document.querySelectorAll('.favorite-heart');
-  //   favoriteHearts.forEach((heart) => {
-  //     heart.addEventListener('click', (event) => {
-  //       event.currentTarget.classList.toggle('fas');
-  //       event.currentTarget.classList.toggle('far');
-  //       event.currentTarget.classList.toggle('text-danger');
-  //     });
-  //   });
+  // const favoriteButtons = document.querySelectorAll('.favorite-heart');
 
-    document.getElementById('search-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      performSearch();
-    });
+  // favoriteButtons.forEach((favoriteButton) => {
+  // favoriteButton.addEventListener('click', function(event) {
+  // event.preventDefault();
 
-    // 検索キー
-    document.getElementById('search-input').addEventListener('keydown', function(event) {
-      if (event.keyCode === 13) {
-        performSearch();
-      }
-    });
+  // ボタンの色を変更
+  // favoriteButton.classList.toggle('fas');
+  // favoriteButton.classList.toggle('far');
+  // favoriteButton.classList.toggle('text-danger');
+
+  // ここでAjaxリクエストを行う
+  // const shopId = favoriteButton.previousElementSibling.value;
+
+  // $.ajax({
+  // url: "{{ route('favorite') }}",
+  // type: 'POST',
+  // data: {
+  // shop_id: shopId,
+  // _token: $('meta[name="csrf-token"]').attr('content'),
+  // },
+  // success: function(response) {
+  // Ajaxリクエストが成功したら何かしらの処理を行う
+  // 例えば、他の要素の更新、ユーザーに通知、など
+  // },
+  // error: function() {
+  // エラー時の処理を追加する（例: アラート表示など）
+  // alert('Failed to toggle favorite status.');
+  // }
+  // });
+  // });
+  // });
 
 
-    // document.querySelector('.area select').addEventListener('change', performSearch);
-    // document.querySelector('.genre select').addEventListener('change', performSearch);
-    document.getElementById('area-select').addEventListener('change', performSearch);
-    document.getElementById('genre-select').addEventListener('change', performSearch);
-  });
+  // document.addEventListener('DOMContentLoaded', function() {
+  // const favoriteHearts = document.querySelectorAll('.favorite-heart');
+  // favoriteHearts.forEach((heart) => {
+  // heart.addEventListener('click', (event) => {
+  // event.currentTarget.classList.toggle('fas');
+  // event.currentTarget.classList.toggle('far');
+  // event.currentTarget.classList.toggle('text-danger');
+  // });
+  // });
 
-  var area = ""; // Declare 'area' outside the performSearch function
-  var genre = ""; // Declare 'genre' outside the performSearch function
-  var searchInput = "";
+  // document.getElementById('search-form').addEventListener('submit', function(event) {
+  // event.preventDefault();
+  // performSearch();
+  // });
+
+  // 検索キー
+  // document.getElementById('search-input').addEventListener('keydown', function(event) {
+  // if (event.keyCode === 13) {
+  // performSearch();
+  // }
+  // });
+
+
+  // document.querySelector('.area select').addEventListener('change', performSearch);
+  // document.querySelector('.genre select').addEventListener('change', performSearch);
+  // document.getElementById('area-select').addEventListener('change', performSearch);
+  // document.getElementById('genre-select').addEventListener('change', performSearch);
+  // });
+
+  // var area = ""; // Declare 'area' outside the performSearch function
+  // var genre = ""; // Declare 'genre' outside the performSearch function
+  // var searchInput = "";
 
   // Update the performSearch function
-  function performSearch() {
-    var areaSelect = document.getElementById('area-select');
-    var genreSelect = document.getElementById('genre-select');
-    var areaValue = areaSelect.options[areaSelect.selectedIndex].value;
-    var genreValue = genreSelect.options[genreSelect.selectedIndex].value;
-    var searchInput = document.getElementById('search-input').value;
+  // function performSearch() {
+  // var areaSelect = document.getElementById('area-select');
+  // var genreSelect = document.getElementById('genre-select');
+  // var areaValue = areaSelect.options[areaSelect.selectedIndex].value;
+  // var genreValue = genreSelect.options[genreSelect.selectedIndex].value;
+  // var searchInput = document.getElementById('search-input').value;
 
-    // 未選択の場合に空の値を設定
-    var area = areaValue === "" ? "all" : areaValue;
-    var genre = genreValue === "" ? "all" : genreValue;
+  // 未選択の場合に空の値を設定
+  // var area = areaValue === "" ? "all" : areaValue;
+  // var genre = genreValue === "" ? "all" : genreValue;
 
-    //   // クライアント側から送信するデータをオブジェクトとして作成
-    //   var formData = {
-    //     all_areas: document.getElementById('area-select').value,
-    //     all_genres: document.getElementById('genre-select').value,
-    //     keyword: document.getElementById('search-input').value
-    //   };
-    console.log(area, 'area');
-    console.log(genre, 'genre');
-    console.log(searchInput, 'keyword');
-    $.ajax({
-        url: "{{ route('search') }}",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          all_areas: area,
-          all_genres: genre,
-          keyword: searchInput
-        }, // データをJSON形式に変換して送信
-        // contentType: 'application/json', // リクエストのContent-TypeをJSONに指定
-        timeout: 5000,
-        //   success: function(response) {
-        //     // リクエストが成功した場合の処理
-        //     displayResults(response);
-        //   },
-        //   error: function() {
-        //     // リクエストが失敗した場合の処理
-        //     alert('Failed to fetch data. Please try again later.');
-        //   }
-        // });
-      })
+  // // クライアント側から送信するデータをオブジェクトとして作成
+  // var formData = {
+  // all_areas: document.getElementById('area-select').value,
+  // all_genres: document.getElementById('genre-select').value,
+  // keyword: document.getElementById('search-input').value
+  // };
+  // console.log(area, 'area');
+  // console.log(genre, 'genre');
+  // console.log(searchInput, 'keyword');
+  // $.ajax({
+  // url: "{{ route('search') }}",
+  // type: 'POST',
+  // dataType: 'json',
+  // data: {
+  // all_areas: area,
+  // all_genres: genre,
+  // keyword: searchInput
+  // }, // データをJSON形式に変換して送信
+  // contentType: 'application/json', // リクエストのContent-TypeをJSONに指定
+  // timeout: 5000,
+  // success: function(response) {
+  // // リクエストが成功した場合の処理
+  // displayResults(response);
+  // },
+  // error: function() {
+  // // リクエストが失敗した場合の処理
+  // alert('Failed to fetch data. Please try again later.');
+  // }
+  // });
+  // })
 
 
-      .done(function(response) {
-        if (typeof response === 'string') {
-          response = JSON.parse(response); // If the response is a string (e.g., when using PHP without JSON response), parse it
-        }
-        displayResults(response); // Pass the filtered data to the displayResults function
-      })
+  // .done(function(response) {
+  // if (typeof response === 'string') {
+  // response = JSON.parse(response); // If the response is a string (e.g., when using PHP without JSON response), parse it
+  // }
+  // displayResults(response); // Pass the filtered data to the displayResults function
+  // })
 
-      .fail(function(jqXHR, textStatus, errorThrown) {
-        alert('Failed to fetch data. Please try again later.');
-      });
+  // .fail(function(jqXHR, textStatus, errorThrown) {
+  // alert('Failed to fetch data. Please try again later.');
+  // });
 
-  }
+  // }
   // .fail(function() {
-  //   alert('failed');
+  // alert('failed');
   // });
 
   // function displayResults(ids) {
-  //   var resultsDiv = document.getElementById('search-results');
-  //   resultsDiv.innerHTML = ''; // 一度表示された結果をクリア
+  // var resultsDiv = document.getElementById('search-results');
+  // resultsDiv.innerHTML = ''; // 一度表示された結果をクリア
 
-  function displayResults(data) {
+  // function displayResults(data) {
 
-    var resultsDiv = document.getElementById('search-results');
-    resultsDiv.innerHTML = ''; // Clear previous results
+  // var resultsDiv = document.getElementById('search-results');
+  // resultsDiv.innerHTML = ''; // Clear previous results
 
-    if (data.length > 0) {
-      data.forEach(function(shop) {
-        var card = createCard(shop); // Create a card for each shop
-        resultsDiv.appendChild(card);
-      });
-    } else {
-      // Show a message when no results found
-      var noResults = document.createElement('p');
-      noResults.innerText = 'No results found.';
-      resultsDiv.appendChild(noResults);
-    }
-  }
+  // if (data.length > 0) {
+  // data.forEach(function(shop) {
+  // var card = createCard(shop); // Create a card for each shop
+  // resultsDiv.appendChild(card);
+  // });
+  // } else {
+  // // Show a message when no results found
+  // var noResults = document.createElement('p');
+  // noResults.innerText = 'No results found.';
+  // resultsDiv.appendChild(noResults);
+  // }
+  // }
 
 
-  function createCard(shop) {
-    // カード要素を作成し、ショップデータに基づいて内容を設定する
-    var card = document.createElement('div');
-    card.className = 'col';
-    card.innerHTML = `
-      <div class="card shadow-sm">
-        <img src="${shop.photo}" class="bd-placeholder-img card-img-top" width="100%" height="225" />
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <p class="shop_name">${shop.name}</p>
-              <p class="area">#${shop.area.name}</p>
-              <p class="genre">#${shop.genre.name}</p>
-              <a href="/shop_detail/${shop.id}">
-                <p class="detail">詳しく見る</p>
-              </a>
-              <form action="{{ route('favorite') }}" method="POST">
-                @csrf
-                <input type="hidden" name="shop_id" value="${shop.id}">
-                <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-    return card;
-  }
+  // function createCard(shop) {
+  // カード要素を作成し、ショップデータに基づいて内容を設定する
+  // var card = document.createElement('div');
+  // card.className = 'col';
+  // card.innerHTML = `
+  // <div class="card shadow-sm">
+  //   <img src="${shop.photo}" class="bd-placeholder-img card-img-top" width="100%" height="225" />
+  //   <div class="card-body">
+  //     <div class="d-flex justify-content-between align-items-center">
+  //       <div class="btn-group">
+  //         <p class="shop_name">${shop.name}</p>
+  //         <p class="area">#${shop.area.name}</p>
+  //         <p class="genre">#${shop.genre.name}</p>
+  //         <a href="/shop_detail/${shop.id}">
+  //           <p class="detail">詳しく見る</p>
+  //         </a>
+  //         <form action="{{ route('favorite') }}" method="POST">
+  //           @csrf
+  //           <input type="hidden" name="shop_id" value="${shop.id}">
+  //           <button type="submit" class="far fa-heart favorite-heart" name="favorite"></button>
+  //         </form>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>
+  // `;
+  // return card;
+  // }
 </script>
 </body>
 
